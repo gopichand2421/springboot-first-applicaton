@@ -1,12 +1,11 @@
 pipeline{
     agent any
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk11'
-    }
-    stage ('Build') {
-       steps {
-          echo 'This is a minimal pipeline.'
-       }
+    stages {
+        stage('Build'){
+            steps {
+                echo "my name is gopichand"
+                bat "mvn clean install"
+            }
+        }
     }
 }
