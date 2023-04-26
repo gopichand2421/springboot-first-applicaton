@@ -4,9 +4,9 @@ pipeline{
         maven 'Maven 3.3.9'
         jdk 'jdk11'
     }
-    stages {
-        stage('build'){
-            echo 'This is minimal pipeline'
-        }
+    stage ('Build') {
+       steps {
+          echo 'This is a minimal pipeline.'
+       }
     }
 }
