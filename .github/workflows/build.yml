@@ -54,7 +54,7 @@ jobs:
         password: ${{ secrets.APP_TOKEN }}
         repository: gopichand2421/spring-first-service
       run: |
-          echo $password | docker login -u gopichand2421 --password-stdin
+          echo $password | docker login -u $username --password-stdin
     - name: docker image push 
       run: docker push gopichand2421/spring-first-service:first-project
     
