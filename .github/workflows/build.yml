@@ -32,4 +32,12 @@ jobs:
     needs: build
     steps:
     - uses: actions/checkout@v3
+    - name: docker image build
+      run: docker build -t first-project .
+    - name: docker image push
+      with: 
+        registry: https://ghcr.io
+        username: gopichand2421
+        password: ${{ secrets.password }}
+        run: docker push -t first-project
     
