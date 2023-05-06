@@ -41,5 +41,5 @@ jobs:
         username: gopichand2421
         password: ${{ secrets.password }}
         repository: gopichand2421/imagerepo
-      run: docker push -t first-project
+      run: docker push first-project
     
