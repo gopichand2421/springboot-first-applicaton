@@ -10,11 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      registry: https://ghcr.io
-      username: gopichand2421
-      password: ${{ secrets.password }}
-      repository: gopichand2421/imagerepo
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -53,7 +48,13 @@ jobs:
     - name: docker image build
       run: docker build -t first-project .
     - name: docker login
-      run: echo $password | docker login ghcr.io -u gopichand2421 --password-stdin
+      env: 
+        registry: https://ghcr.io
+        username: gopichand2421
+        password: ${{ secrets.PASSWORD }}
+        repository: gopichand2421/imagerepo
+      run: |
+          echo $password | docker login ghcr.io -u gopichand2421 --password-stdin
     - name: docker image push 
       run: docker push first-project
     
