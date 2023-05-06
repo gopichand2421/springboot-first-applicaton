@@ -56,5 +56,5 @@ jobs:
       run: |
           echo $password | docker login $registry -u $username --password-stdin
     - name: docker image push 
-      run: docker push $username/first-project
+      run: docker push ${{ secrets.APP_USER }}/first-project
     
