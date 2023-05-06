@@ -47,14 +47,14 @@ jobs:
     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
       run: docker build --tag ${{ secrets.APP_USER }}/first-project .
-#     - name: docker login
-#       env: 
-#         registry: https://ghcr.io
-#         username: ${{ secrets.APP_USER }}
-#         password: ${{ secrets.APP_TOKEN }}
-#         repository: gopichand2421/spring-first-service
-#       run: |
-#           echo $password | docker login -u $username --password-stdin
+    - name: docker login
+      env: 
+        registry: ghcr.io
+        username: ${{ secrets.APP_USER }}
+        password: ${{ secrets.APP_TOKEN }}
+        repository: gopichand2421/spring-first-service
+      run: |
+          echo $password | docker login $registry -u $username --password-stdin
     - name: docker image push 
-      run: docker push gopichand2421/first-project
+      run: docker push $username/first-project
     
