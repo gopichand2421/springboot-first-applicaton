@@ -36,6 +36,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    env: 
+      registry: ghcr.io
+      username: ${{ secrets.APP_USER }}
+      password: ${{ secrets.APP_TOKEN }}
+      tag: 1.0.0
     steps:
     - name: Checkout
       uses: actions/checkout@v3
@@ -46,16 +51,11 @@ jobs:
         path: target/
     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
-      run: docker build --tag ghcr.io/${{ secrets.APP_USER }}/first-project .
+      run: docker build --tag $registry/$username/firstapp:$tag .
     - name: docker login
-      env: 
-        registry: ghcr.io
-        username: ${{ secrets.APP_USER }}
-        password: ${{ secrets.APP_TOKEN }}
-        repository: gopichand2421/spring-first-service
       run: |
           echo $password | docker login $registry -u $username --password-stdin
-           docker push $registry/${{ secrets.APP_USER }}/first-project
-#     - name: docker image push 
-#       run: docker push ${{ secrets.APP_USER }}/first-project
+           
+    - name: docker image push 
+      run: docker push $registry/${{ secrets.APP_USER }}/first-project:$tag
     
