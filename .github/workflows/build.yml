@@ -10,6 +10,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env: 
+      registry: ghcr.io
+      username: ${{ secrets.APP_USER }}
+      password: ${{ secrets.APP_TOKEN }}
+      tag: 1.0.1
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -20,36 +25,12 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B install -DskipTest=true --file pom.xml
-#     - uses: actions/checkout@v3
-#     - run: mkdir -p target/
-#     - run: echo hello > target/springboot-first-applicaton.jar
-#     - uses: actions/upload-artifact@v3
-#       with:
-#         name: springboot-first-applicaton
-#         path: target/
     - name: Upload artifacts to github
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
         path: ${{ github.workspace }}/target/*.jar
         retention-day: 1
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    env: 
-      registry: ghcr.io
-      username: ${{ secrets.APP_USER }}
-      password: ${{ secrets.APP_TOKEN }}
-      tag: 1.0.0
-    steps:
-#     - name: Checkout
-#       uses: actions/checkout@v3
-#     - uses: actions/checkout@v3
-#     - uses: actions/download-artifact@v3
-#       with:
-#         name: springboot-first-applicaton
-#         path: target/
-#     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
       run: docker build --tag $registry/$username/firstapp:$tag .
     - name: docker login
@@ -58,4 +39,3 @@ jobs:
            
     - name: docker image push 
       run: docker push $registry/${{ secrets.APP_USER }}/firstapp:$tag
-    
