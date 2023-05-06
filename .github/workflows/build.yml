@@ -49,7 +49,7 @@ jobs:
     - name: docker image build
       run: docker build -t first-project .
     - name: docker login
-      run: docker login ghcr.io --username gopichand2421 --password ${{secrets.password}}
+      run: docker login ghcr.io -u gopichand2421 -p ${{ secrets.password }}
     - name: docker image push
       env: 
         registry: https://ghcr.io
