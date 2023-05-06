@@ -36,11 +36,10 @@ jobs:
     - name: docker image build
       uses: actions/checkout@v3
     - name: docker image push
-      uses: docker/build-push-action@v2
-      with: 
+      env: 
         registry: https://ghcr.io
         username: gopichand2421
         password: ${{ secrets.password }}
         repository: gopichand2421/imagerepo
-        run: docker push -t first-project
+      run: docker push -t first-project
     
