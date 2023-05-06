@@ -25,7 +25,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: jar-artifact
-        path: ${{ github.workspace }}/springboot-first-applicaton/target/*.jar
+        path: ${{ github.workspace }}/target/*.jar
         retention-day: 1
   deploy:
     runs-on: ubuntu-latest
