@@ -45,7 +45,7 @@ jobs:
       with:
         name: springboot-first-applicaton
         path: target/
-    - run: cat target/springboot-first-applicaton
+    - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
       run: docker build -t first-project . 
     - name: docker image push
