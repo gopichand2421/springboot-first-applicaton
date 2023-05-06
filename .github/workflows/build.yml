@@ -55,7 +55,7 @@ jobs:
         repository: gopichand2421/spring-first-service
       run: |
           echo $password | docker login $registry -u $username --password-stdin
-           docker push ${{ secrets.APP_USER }}/first-project
+           docker push $registry/${{ secrets.APP_USER }}/first-project
 #     - name: docker image push 
 #       run: docker push ${{ secrets.APP_USER }}/first-project
     
