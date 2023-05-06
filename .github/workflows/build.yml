@@ -48,10 +48,14 @@ jobs:
     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
       run: docker build -t first-project .
-    - name: repo login
-      run: export CR_PAT= ${{ secrets.password }}
     - name: docker login
-      run: echo  $CR_PAT | docker login ghcr.io -u gopichand2421 --password-stdin
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@28218f9b04b4f3f62068d7b6ce6ca5b26e35336c
+      with: 
+        registry: https://ghcr.io
+        username: gopichand2421
+        password: ${{ secrets.password }}
+        repository: gopichand2421/imagerepo
     - name: docker image push 
       env: 
         registry: https://ghcr.io
