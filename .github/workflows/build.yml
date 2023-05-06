@@ -50,11 +50,11 @@ jobs:
     - name: docker login
       env: 
         registry: https://ghcr.io
-        username: gopichand2421
-        password: ${{ secrets.PASSWORD }}
-        repository: gopichand2421/imagerepo
+        username: ${{ secrets.APP_USER }}
+        password: ${{ secrets.APP_TOKEN }}
+        repository: gopichand2421/spring-first-service
       run: |
-          echo $password | docker login ghcr.io -u gopichand2421 --password-stdin
+          echo $password | docker login -u gopichand2421 --password-stdin
     - name: docker image push 
-      run: docker push first-project
+      run: docker push gopichand2421/spring-first-service:first-project
     
