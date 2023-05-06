@@ -52,10 +52,8 @@ jobs:
     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
       run: docker build -t first-project .
-    - name: docker image build
-      run: docker build -t first-project .
     - name: docker login
-      run: echo ${{ secrets.password }} | docker login ghcr.io -u gopichand2421 --password-stdin
+      run: echo $password | docker login ghcr.io -u gopichand2421 --password-stdin
     - name: docker image push 
       run: docker push first-project
     
