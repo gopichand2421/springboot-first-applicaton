@@ -27,17 +27,20 @@ jobs:
         name: jar-artifact
         path: ${{ github.workspace }}/target/*.jar
         retention-day: 1
+    - name: Docker build
+      run: docker build -t first-project .
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - uses: actions/checkout@v3
     - name: docker image build
-      run: docker build -t first-project .
+      uses: actions/checkout@v3
     - name: docker image push
+      uses: docker/build-push-action@v2
       with: 
         registry: https://ghcr.io
         username: gopichand2421
         password: ${{ secrets.password }}
+        repository: gopichand2421/imagerepo
         run: docker push -t first-project
     
