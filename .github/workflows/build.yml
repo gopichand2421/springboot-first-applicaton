@@ -47,7 +47,9 @@ jobs:
         path: target/
     - run: cat target/springboot-first-applicaton.jar
     - name: docker image build
-      run: docker build -t first-project . 
+      run: docker build -t first-project .
+    - name: docker login
+      run: docker login ghcr.io -u gopichand2421 -p ${{secrets.password}}
     - name: docker image push
       env: 
         registry: https://ghcr.io
