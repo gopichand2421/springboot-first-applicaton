@@ -55,7 +55,6 @@ jobs:
         registry: https://ghcr.io
         username: gopichand2421
         password: ${{ secrets.password }}
-        repository: gopichand2421/imagerepo
     - name: docker image push 
       env: 
         registry: https://ghcr.io
